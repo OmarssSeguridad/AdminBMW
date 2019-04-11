@@ -34,19 +34,31 @@
     <h5 class="h5" style="color: white;">BMW Club Motorrad Metepec</h5>
  <ul class="navbar-nav">
     <li class="nav-item">
-      <a class="nav-link" href="index.html">Inicio</a>
+      <a class="nav-link" href="/">Inicio</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="nosotros.html">Quienes Somos</a>
+      <a class="nav-link" href="/nosotros">Quienes Somos</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="rutas.html">Rutas</a>
+      <a class="nav-link" href="/rutas">Rutas</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="galeria.html">Galería</a>
+      <a class="nav-link" href="/galeria">Galería</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="unete.html">Únete</a>
+      <a class="nav-link" href="/unete">Únete</a>
+    </li>
+        <li class="nav-item">
+      @if (Route::has('login'))
+          <div class="top-right links">
+              @auth
+                  <a class="nav-link" href="{{ url('/home') }}">Home</a>
+              @else
+                  <a class="nav-link" href="{{ route('login') }}">Ingresar</a>
+
+              @endauth
+          </div>
+      @endif
     </li>
   </ul>
   </div>
@@ -86,7 +98,7 @@
       </h5>
     </div>
   </div>
-  
+  <br/>  
   <!-- Footer -->
   <footer class="section footer-classic context-dark bg-image" >
     <div class="container">

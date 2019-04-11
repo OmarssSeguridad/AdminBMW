@@ -14,4 +14,9 @@ class AdminController extends Controller
 	public function create(){
     	return view("admin.AltaUsuario");
     }
+
+    public function mostrarUsers()
+    {
+    	return view("admin.usuarios");
+    }
 }
