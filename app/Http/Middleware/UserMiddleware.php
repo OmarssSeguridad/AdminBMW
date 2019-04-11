@@ -15,7 +15,7 @@ class UserMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if (auth()->check() && auth()->user()->tipoUser=='User')
+        if (auth()->check() && auth()->user()->tipoUser=='user')
             return $next($request);
 
         return redirect('/');
