@@ -36,5 +36,5 @@ Route::group([
     'middleware' => 'user',
     'prefix' => 'user',
 ], function () {
-    Route::get('/dashboard', 'UserController@user')->name('user');
+    Route::get('/dashboard', 'userController@user')->name('user');
 });
