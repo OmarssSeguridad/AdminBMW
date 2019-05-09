@@ -13,7 +13,7 @@ class CreateModoPagoTable extends Migration
      */
     public function up()
     {
-        Schema::create('modo_pago', function (Blueprint $table) {
+        Schema::create('modo_pagos', function (Blueprint $table) {
             $table->bigIncrements('id_modopago');
             $table->string('name');
             $table->string('detalle');
@@ -28,6 +28,6 @@ class CreateModoPagoTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('modo_pago');
+        Schema::dropIfExists('modo_pagos');
     }
 }
