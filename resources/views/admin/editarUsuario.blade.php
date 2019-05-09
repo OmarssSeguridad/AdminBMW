@@ -7,7 +7,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                <h4 class="card-title" style="font-family: 'Montserrat';">Registrar Usuario</h4>
+                                <h4 class="card-title" style="font-family: 'Montserrat';">Editar Usuario</h4>
                                 </div>
                                 <div class="card-body">
                                  <form class="form-horizontal" role="form" method="POST" action="{{ route('altaUsuario') }}">

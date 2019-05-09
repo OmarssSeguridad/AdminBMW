@@ -20,7 +20,7 @@ class CreateMotociclistasTable extends Migration
             $table->string('am');
             $table->string('direccion');
             $table->string('fecNac');
-            $table->Integer('telefono');
+            $table->string('telefono');
             $table->string('email');
             $table->timestamps();
         });

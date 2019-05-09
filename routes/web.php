@@ -27,16 +27,32 @@ Route::group([
 ], function () {
     Route::get('/dashboard', 'AdminController@admin')->name('admin');
     //ALTAS
-    Route::get('/AltaUsuario', 'AdminController@create')->name('altaUsuario');
-    Route::post('/AltaUsuario', 'AdminController@store');
-    Route::get('/AltaMotociclista', 'motociclistasController@create')->name('AltaMotociclista');
-	Route::get('/AltaPago', 'pagosController@create')->name('altaPago');
+    Route::get('/AltaUsuario', 'UserController@create')->name('altaUsuario');
+    Route::post('/AltaUsuario', 'UserController@store');
+
+    Route::get('/AltaMotociclista', 'motociclistasController@create')->name('altaMotociclista');
+    Route::post('/AltaMotociclista', 'motociclistasController@store');
+
+	Route::get('/AltaPago', 'detallepagoController@create')->name('altaPago');
+	Route::post('/AltaPago','detallepagoController@store');
+		
 	Route::get('/AltaRuta', 'rutaController@create')->name('altaRuta');
+
 	Route::get('/AltaProducto', 'productoController@create')->name('altaProducto');
+	Route::post('/AltaProducto', 'productoController@store');
+	
 	Route::get('/AltaCategoria', 'categoriaController@create')->name('altaCategoria');
+	Route::post('/AltaCategoria', 'categoriaController@store');
+
 	Route::get('/AltaModoPago', 'modoPagoController@create')->name('altaModoPago');
+	Route::post('/AltaModoPago', 'modoPagoController@store');
 
 	//BAJAS
+	Route::delete('/bajaUsuario/{id}', 'AdminController@destroy');
+
+	//MODIFICAIONES
+	Route::get('/editaUsuario/{id}','adminController@edit')->name('editarUsuario');
+	Route::put('/editarUsuario/{id}','adminController@update');
 
 
 	//CONSULTAS
