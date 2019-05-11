@@ -58,11 +58,44 @@ Route::group([
 	//CONSULTAS
     Route::get('/Usuarios', 'AdminController@mostrarUsers');
 	Route::get('/Motociclistas', 'motociclistasController@mostrarMotociclistas');
-	Route::get('/Pagos', 'pagosController@create');
+	//Route::get('/Pagos', 'pagosController@create');
 	Route::get('/Rutas', 'rutaController@mostrarRutas');
 	Route::get('/Productos', 'productoController@mostrarProductos');
 	Route::get('/Categorias', 'categoriaController@mostrarCategorias');
 	Route::get('/ModoPago', 'modoPagoController@mostrarModoPago');
+
+
+/*
+
+
+Verb	     URI	                  Action	     Route Name
+GET	        /photos	                  index	         photos.index
+GET	        /photos/create	          create	     photos.create
+POST	    /photos         	      store	         photos.store
+GET	        /photos/{photo}  	      show	         photos.show
+GET	        /photos/{photo}/edit	  edit	         photos.edit
+PUT/PATCH	/photos/{photo}	          update	     photos.update
+DELETE	    /photos/{photo}	          destroy	     photos.destroy
+
+*/
+
+
+
+	//Muchas Rutas xD
+Route::resource('Categoria', 'CategoriaController')->except([
+    'create', 'store'
+]);
+
+Route::resource('motociclista', 'motociclistasController')->except([
+    'create', 'store'
+]);
+
+Route::resource('producto', 'productoController')->except([
+    'create', 'store'
+]);
+
+
+
 });
 
 Route::group([
