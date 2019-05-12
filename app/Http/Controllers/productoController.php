@@ -4,14 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Productos;
+use App\Categorias;
 class productoController extends Controller
 {
-        	public function create(){
-    	return view("admin.AltaProducto");
+    public function create(){
+      $categoria=Categorias::All();
+     	return view("admin.AltaProducto", compact('categoria'));
     }
-   public function store(request $request)
-   {
-		$producto = new Productos;   
+
+    public function store(request $request)
+    {
+        $categoria=Categorias::All();
+		    $producto = new Productos;   
         $producto->name = $request->name;
         $producto->precio = $request->precio;
         $producto->stock = $request->stock;
@@ -24,6 +28,6 @@ class productoController extends Controller
         ]);
 
         $producto->save(); 
-        return view("admin.altaProducto");
+        return view("admin.altaProducto", compact('categoria'));
     }
 }

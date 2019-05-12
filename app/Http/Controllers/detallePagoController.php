@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Pagos;
-use App\detallePago;
+use App\detallesPago;
 use App\Motociclistas;
 use App\Productos;
 use App\ModoPago;
@@ -45,10 +45,11 @@ class detallePagoController extends Controller
         $pago= new Pagos();
         $pago->id_motociclista= $request->id_motociclista;
         $pago->fecha=$request->fecha;
-        $pago->id_modoPago=$request->id_modoPago;
+        $pago->id_modopago=$request->id_motociclista;
         $pago->save();
-        $detallePago = new detallePago();
-        $detallePago->id_pago= Pago::find($request['id']);
+
+        $detallePago = new detallesPago();
+        $detallePago->id_pago= Pagos::select('id_pago')->max('id_pago'); 
         $detallePago->id_producto= $request->id_producto;
         $detallePago->cantidad= $request->cantidad;
         $detallePago->precio= $request->precio;
@@ -57,6 +58,11 @@ class detallePagoController extends Controller
         ]);
 
         $detallePago->save(); 
+        $motociclista=Motociclistas::all();
+        $producto=Productos::all();
+        $modoPago=ModoPago::all();
+        return view("admin.AltaPago",compact('motociclista','producto','modoPago'));
+
     }
     /**
      * Display the specified resource.

@@ -52,7 +52,9 @@
                                         <label class="label">Categoria</label>
                                         <!--MODIFICAR EN CUANTO ESTEN LAS CATEGORIAS "Agregar foreach para options"-->
                                             <select name="id_categoria" class="form-control" placeholder="Seleciona">
-                                                <option value="1">Playeras</option>
+                                                @foreach($categoria as $categorias)
+                                                <option value="{{$categorias->id_categoria}}">{{$categorias->name}}</option>
+                                                @endforeach
                                             </select>
                                             @if ($errors->has('id_categoria'))
                                                 <span class="alert alert-danger">

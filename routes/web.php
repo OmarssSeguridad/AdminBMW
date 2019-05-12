@@ -58,7 +58,7 @@ Route::group([
 	//CONSULTAS
     Route::get('/Usuarios', 'AdminController@mostrarUsers');
 	Route::get('/Motociclistas', 'motociclistasController@mostrarMotociclistas');
-	Route::get('/Pagos', 'pagosController@create');
+	Route::get('/Pagos', 'detallePagoController@mostrarPagos');
 	Route::get('/Rutas', 'rutaController@mostrarRutas');
 	Route::get('/Productos', 'productoController@mostrarProductos');
 	Route::get('/Categorias', 'categoriaController@mostrarCategorias');
