@@ -13,7 +13,7 @@ class CreateDetallesRutaTable extends Migration
      */
     public function up()
     {
-        Schema::create('detalles_ruta', function (Blueprint $table) {
+        Schema::create('detalles_rutas', function (Blueprint $table) {
             $table->bigIncrements('id_detalleruta');
             $table->unsignedbigInteger('id_ruta')->unsigned();
             $table->unsignedbigInteger('id_motociclista')->unsigned();

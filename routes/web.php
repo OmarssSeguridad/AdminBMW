@@ -36,7 +36,8 @@ Route::group([
 	Route::get('/AltaPago', 'detallepagoController@create')->name('altaPago');
 	Route::post('/AltaPago','detallepagoController@store');
 		
-	Route::get('/AltaRuta', 'rutaController@create')->name('altaRuta');
+	Route::get('/AltaRuta', 'detalleRutaController@create')->name('altaRuta');
+	Route::post('/AltaRuta', 'detalleRutaController@store');
 
 	Route::get('/AltaProducto', 'productoController@create')->name('altaProducto');
 	Route::post('/AltaProducto', 'productoController@store');
@@ -59,7 +60,7 @@ Route::group([
     Route::get('/Usuarios', 'AdminController@mostrarUsers');
 	Route::get('/Motociclistas', 'motociclistasController@mostrarMotociclistas');
 	Route::get('/Pagos', 'detallePagoController@mostrarPagos');
-	Route::get('/Rutas', 'rutaController@mostrarRutas');
+	Route::get('/Rutas', 'detalleRutaController@mostrarRutas');
 	Route::get('/Productos', 'productoController@mostrarProductos');
 	Route::get('/Categorias', 'categoriaController@mostrarCategorias');
 	Route::get('/ModoPago', 'modoPagoController@mostrarModoPago');

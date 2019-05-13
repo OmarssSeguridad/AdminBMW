@@ -8,6 +8,7 @@ use App\detallesPago;
 use App\Motociclistas;
 use App\Productos;
 use App\ModoPago;
+use DB;
 class detallePagoController extends Controller
 {
     /**
@@ -110,6 +111,18 @@ class detallePagoController extends Controller
     }
     public function mostrarPagos()
     {
-        return view("admin.Pagos");
+        $pagos = DB::select('SELECT d.id_detalle as id, m.name AS name, m.ap AS ap, m.am AS am, p.fecha as fecha, q.name AS modopago, w.name as producto, d.cantidad as cantidad, d.precio as precio FROM detalles_pagos d JOIN pagos p, motociclistas m, modo_pagos q, productos w WHERE p.id_motociclista = m.id_motociclista AND q.id_modopago = p.id_modopago AND w.id_producto = d.id_producto AND p.id_pago = d.id_pago');
+
+        
+
+        //
+        /*$pagos = detallesPago::join('pagos','pagos.id_pago', '=', 'detalles_pagos.id_pago')
+        ->join('motociclistas', 'pagos.id_motociclista', '=', 'motociclistas.id_motociclista')
+        ->join('modo_pagos', 'modo_pagos.id_modopago', '=', 'pagos.id_modopago')
+        ->join('productos', 'productos.id_producto', '=', 'detalles_pagos.id_producto')
+        ->select('detalles_pagos.id_detalle, motociclistas.name, motociclistas.ap, motociclistas.am, pagos.fecha, modo_pagos.name, productos.name, detalles_pagos.cantidad, detalles_pagos.precio')
+        ->get();*/
+
+        return view("admin.Pagos",compact('pagos'));
     }
 }
