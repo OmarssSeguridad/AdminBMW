@@ -63,11 +63,11 @@
       </a>
       <div class="dropdown-menu">
         <a class="dropdown-item" href="/admin/Usuarios">Consultar Usuarios</a>
-        <a class="dropdown-item" href="/admin/Motociclistas">Consultar Motociclista</a>
+        <a class="dropdown-item" href="/admin/motociclista">Consultar Motociclista</a>
         <a class="dropdown-item" href="/admin/Pagos">Consultar Pagos</a>
         <a class="dropdown-item" href="/admin/Rutas">Consultar Rutas</a>
-        <a class="dropdown-item" href="/admin/Productos">Consultar Productos</a>
-        <a class="dropdown-item" href="/admin/Categorias">Consultar Categorias</a>
+        <a class="dropdown-item" href="/admin/producto">Consultar Productos</a>
+        <a class="dropdown-item" href="/admin/Categoria">Consultar Categorias</a>
         <a class="dropdown-item" href="/admin/ModoPago">Consultar Modo de pago</a>
       </div>
     </li>

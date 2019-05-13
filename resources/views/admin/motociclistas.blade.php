@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-10">
             <div class="card">
-                <div class="card-header">Productos</div>
+                <div class="card-header">Categorias</div>
 
                 <div class="card-body">
                     <table class="table">
@@ -13,26 +13,28 @@
                         <tr>
                           <th scope="col">ID</th>
                           <th scope="col">Nombre </th>
-                          <th scope="col">Precio</th>
-                          <th scope="col">Stock</th>
-                          <th scope="col">Categoria</th>
+                          <th scope="col">Dirección</th>
+                          <th scope="col">Fecha N.</th>
+                          <th scope="col">Teléfono</th>
+                          <th scope="col">Correo</th>
                           <th scope="col">Acciones</th> 
 
                         </tr>
                       </thead>
                       <tbody>
-                        @foreach($productos as $producto)
+                        @foreach($motociclistas as $motociclista)
                         <tr>
-                          <th scope="row">{{$producto->id_producto}}</th>
-                          <td>{{$producto->name}} </td>
-                          <td>{{$producto->precio}}</td>
-                          <td>{{$producto->stock}}</td>
-                          <td>{{$producto->categoria}}</td>
+                          <th scope="row">{{$motociclista->id_motociclista}}</th>
+                          <td>{{$motociclista->name}} {{$motociclista->ap}} {{$motociclista->am}}</td>
+                          <td>{{$motociclista->direccion}}</td>
+                          <td>{{$motociclista->fecNac}}</td>
+                          <td>{{$motociclista->telefono}}</td>
+                          <td>{{$motociclista->email}}</td>
                           <td>
-                            <form action="{{ route('producto.destroy', $producto->id_producto)}}" method="post">
+                            <form action="{{ route('motociclista.destroy', $motociclista->id_motociclista)}}" method="post">
                               @csrf
                               @method('PUT')
-                              <a href="{{ route('producto.edit',  $producto->id_producto) }}" class="edit" title="Editar" data-toggle="tooltip"><i class=" material-icons">&#xE254;</i></a>
+                              <a href="{{ route('motociclista.edit',  $motociclista->id_motociclista) }}" class="edit" title="Editar" data-toggle="tooltip"><i class=" material-icons">&#xE254;</i></a>
                               <button type="submit" class="btn btn-link edit" title="Eliminar" data-toggle="tooltip"> <i class="material-icons">&#xE872;</i></button>
                             </form>
                           </td>
