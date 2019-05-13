@@ -18,6 +18,7 @@ class CategoriaController extends Controller
         $categorias = Categorias::all();
 
         return view("admin.categorias",compact('categorias'));
+
     }
 
     /**

@@ -13,7 +13,7 @@ class CreateDetallesPagoTable extends Migration
      */
     public function up()
     {
-        Schema::create('detalles_pago', function (Blueprint $table) {
+        Schema::create('detalles_pagos', function (Blueprint $table) {
             $table->bigIncrements('id_detalle');
             $table->Integer('id_pago');
             $table->unsignedbigInteger('id_producto')->unsigned();

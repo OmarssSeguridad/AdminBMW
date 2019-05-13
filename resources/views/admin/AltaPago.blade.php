@@ -44,7 +44,7 @@
                                 <div class="col-md-4 px-1">
                                     <div class="form-group{{ $errors->has('id_producto') ? ' has-error' : '' }}">
                                         <label class="label">Productos</label>
-                                        <select name="producto" class="form-control" placeholder="Seleciona">
+                                        <select name="id_producto" class="form-control" placeholder="Seleciona">
                                             @foreach($producto as $productos)
                                             <option value="{{$productos->id_producto}}">{{$productos->name}}</option>
                                             @endforeach
@@ -78,9 +78,10 @@
                                             @endif
                                     </div>
                                 </div>
+                                <div class="col-md-4 px-1">
                                     <div class="form-group{{ $errors->has('id_modoPago') ? ' has-error' : '' }}">
-                                        <label class="label">Modo de Pago</label>
-                                        <select name="modoPago" class="form-control" placeholder="Seleciona">
+                                        <label class="label">Modo Pago</label>
+                                        <select name="id_modoPago" class="form-control" placeholder="Seleciona">
                                             @foreach($modoPago as $modoPagos)
                                             <option value="{{$modoPagos->id_modoPago}}">{{$modoPagos->name}}</option>
                                             @endforeach
@@ -91,6 +92,7 @@
                                                 </span>
                                             @endif
                                     </div>
+                                </div>
                                 </div>                            
 
                                 <button type="submit" class="btn btn-info btn-fill pull-right" >Crear Usuario</button>

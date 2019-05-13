@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Pagos;
-use App\detallePago;
+use App\detallesPago;
 use App\Motociclistas;
 use App\Productos;
 use App\ModoPago;
+use DB;
 class detallePagoController extends Controller
 {
     /**
@@ -45,10 +46,11 @@ class detallePagoController extends Controller
         $pago= new Pagos();
         $pago->id_motociclista= $request->id_motociclista;
         $pago->fecha=$request->fecha;
-        $pago->id_modoPago=$request->id_modoPago;
+        $pago->id_modopago=$request->id_motociclista;
         $pago->save();
-        $detallePago = new detallePago();
-        $detallePago->id_pago= Pago::find($request['id']);
+
+        $detallePago = new detallesPago();
+        $detallePago->id_pago= Pagos::select('id_pago')->max('id_pago'); 
         $detallePago->id_producto= $request->id_producto;
         $detallePago->cantidad= $request->cantidad;
         $detallePago->precio= $request->precio;
@@ -57,6 +59,11 @@ class detallePagoController extends Controller
         ]);
 
         $detallePago->save(); 
+        $motociclista=Motociclistas::all();
+        $producto=Productos::all();
+        $modoPago=ModoPago::all();
+        return view("admin.AltaPago",compact('motociclista','producto','modoPago'));
+
     }
     /**
      * Display the specified resource.
@@ -104,6 +111,18 @@ class detallePagoController extends Controller
     }
     public function mostrarPagos()
     {
-        return view("admin.Pagos");
+        $pagos = DB::select('SELECT d.id_detalle as id, m.name AS name, m.ap AS ap, m.am AS am, p.fecha as fecha, q.name AS modopago, w.name as producto, d.cantidad as cantidad, d.precio as precio FROM detalles_pagos d JOIN pagos p, motociclistas m, modo_pagos q, productos w WHERE p.id_motociclista = m.id_motociclista AND q.id_modopago = p.id_modopago AND w.id_producto = d.id_producto AND p.id_pago = d.id_pago');
+
+        
+
+        //
+        /*$pagos = detallesPago::join('pagos','pagos.id_pago', '=', 'detalles_pagos.id_pago')
+        ->join('motociclistas', 'pagos.id_motociclista', '=', 'motociclistas.id_motociclista')
+        ->join('modo_pagos', 'modo_pagos.id_modopago', '=', 'pagos.id_modopago')
+        ->join('productos', 'productos.id_producto', '=', 'detalles_pagos.id_producto')
+        ->select('detalles_pagos.id_detalle, motociclistas.name, motociclistas.ap, motociclistas.am, pagos.fecha, modo_pagos.name, productos.name, detalles_pagos.cantidad, detalles_pagos.precio')
+        ->get();*/
+
+        return view("admin.Pagos",compact('pagos'));
     }
 }

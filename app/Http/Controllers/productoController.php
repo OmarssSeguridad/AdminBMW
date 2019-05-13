@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Productos;
 use App\Categorias;
 
+
 class productoController extends Controller
 {
     /**
@@ -55,7 +56,7 @@ class productoController extends Controller
         ]);
 
         $producto->save(); 
-        return view("admin.altaProducto");
+        return view("admin.altaProducto", compact('categoria'));
     }
 
     /**

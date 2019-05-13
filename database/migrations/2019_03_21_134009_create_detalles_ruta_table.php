@@ -13,7 +13,7 @@ class CreateDetallesRutaTable extends Migration
      */
     public function up()
     {
-        Schema::create('detalles_ruta', function (Blueprint $table) {
+        Schema::create('detalles_rutas', function (Blueprint $table) {
             $table->bigIncrements('id_detalleruta');
             $table->unsignedbigInteger('id_ruta')->unsigned();
             $table->unsignedbigInteger('id_motociclista')->unsigned();
@@ -34,7 +34,7 @@ class CreateDetallesRutaTable extends Migration
         });
         Schema::table('pagos',function (Blueprint $table) {
             $table->foreign('id_motociclista')->references('id_motociclista')->on('motociclistas');
-            $table->foreign('id_modopago')->references('id_modopago')->on('modo_pago');
+            $table->foreign('id_modopago')->references('id_modopago')->on('modo_pagos');
         });
         Schema::table('detalles_ruta',function (Blueprint $table) {
             $table->foreign('id_ruta')->references('id_ruta')->on('rutas');
