@@ -85,7 +85,13 @@ class detallePagoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $detallePago = detallesPago::find($id);
+        $motociclista=Motociclistas::all();
+        $producto=Productos::all();
+        $modoPago=ModoPago::all();
+        $pago=Pagos::find($detallePago->id_pago);
+
+        return view('admin.editarPago',compact('detallePago','motociclista','producto','modoPago','pago'));
     }
 
     /**
@@ -97,7 +103,26 @@ class detallePagoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $detallePago = detallesPago::find($id);
+        $pago=Pagos::find($detallePago->id_pago);
+
+        $this->validate($request, [
+           
+        ]);
+       
+        $pago->id_motociclista= $request->get('id_motociclista');
+        $pago->fecha=$request->get('fecha');
+        $pago->id_modopago=$request->get('id_motociclista');
+        $pago->save();
+
+        $detallePago->id_producto= $request->get('id_producto');
+        $detallePago->cantidad= $request->get('cantidad');
+        $detallePago->precio= $request->get('precio');
+        
+
+        $detallePago->save(); 
+
+        return redirect()->route('pagos');
     }
 
     /**
