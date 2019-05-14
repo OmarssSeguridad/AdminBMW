@@ -17,7 +17,7 @@
                           <th scope="col">Fecha N.</th>
                           <th scope="col">Teléfono</th>
                           <th scope="col">Correo</th>
-                          <th scope="col">Acciones</th> 
+                          <th scope="col" colspan="2">Acciones</th> 
 
                         </tr>
                       </thead>
@@ -31,15 +31,25 @@
                           <td>{{$motociclista->telefono}}</td>
                           <td>{{$motociclista->email}}</td>
                           <td>
-                            <form action="{{ route('motociclista.destroy', $motociclista->id_motociclista)}}" method="post">
-                              @csrf
-                              @method('PUT')
-                              <a href="{{ route('motociclista.edit',  $motociclista->id_motociclista) }}" class="edit" title="Editar" data-toggle="tooltip"><i class=" material-icons">&#xE254;</i></a>
-                              <button type="submit" class="btn btn-link edit" title="Eliminar" data-toggle="tooltip"> <i class="material-icons">&#xE872;</i></button>
+                             <form action="{{ route('motociclista.edit',  $motociclista->id_motociclista) }}" method="PUT">
+                                {{ csrf_field() }}
+                                {{ method_field('PUT') }}
+                                <button type="submit"class="btn btn-info btn-fill pull-right"><i class="fa fa-edit"></i></button>
                             </form>
+                            </td>
+                            <td>
+                           <form action="{{'/admin/bajaMotociclista/'.$motociclista->id_motociclista}}" method="post"> 
+                                    {{ csrf_field() }}
+                                    {{ method_field('DELETE') }}
+
+                                <button type="submit" class="btn btn-danger btn-fill pull-right"><i class="fa fa-trash-o" aria-hidden="true"></i> </button>
+                            </form> 
+
                           </td>
                         </tr>
                         @endforeach
+
+                        
 
                       </tbody>
                     </table>

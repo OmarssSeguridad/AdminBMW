@@ -6,6 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta charset="utf-8">
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+  <!--icons -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
   <link rel="stylesheet" type="text/css" href="{{ asset('/css/estilosOmi.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ asset('/css/bootstrap.min.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ asset('/css/smoke.css') }}">

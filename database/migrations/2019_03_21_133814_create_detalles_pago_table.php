@@ -15,7 +15,7 @@ class CreateDetallesPagoTable extends Migration
     {
         Schema::create('detalles_pagos', function (Blueprint $table) {
             $table->bigIncrements('id_detalle');
-            $table->Integer('id_pago');
+            $table->unsignedbigInteger('id_pago');
             $table->unsignedbigInteger('id_producto')->unsigned();
             $table->Integer('cantidad');
             $table->float('precio',10,2); 

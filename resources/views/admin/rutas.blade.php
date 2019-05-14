@@ -16,7 +16,7 @@
                           <th scope="col">Detalle Ruta</th>
                           <th scope="col">Nombre</th>
                           <th scope="col">Imagen</th>
-                          <th scope="col">Accion</th>
+                          <th scope="col" colspan="2">Accion</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -27,7 +27,22 @@
                           <td>{{$rutas->detalle}}</td>
                           <td>{{$rutas->name}} {{$rutas->ap}} {{$rutas->am}}</td>
                           <td>{{$rutas->imagen}}</td>
+                          <td>
+                             <form action="" method="PUT">
+                                {{ csrf_field() }}
+                                {{ method_field('PUT') }}
+                                <button type="submit"class="btn btn-info btn-fill pull-right"><i class="fa fa-edit"></i></button>
+                            </form>
+                            </td>
+                            <td>
+                           <form action="{{'/admin/bajaRuta/'.$rutas->id.'/'.$rutas->idruta.'/'.$rutas->idimagen}}" method="post"> 
+                                    {{ csrf_field() }}
+                                    {{ method_field('DELETE') }}
 
+                                <button type="submit" class="btn btn-danger btn-fill pull-right"><i class="fa fa-trash-o" aria-hidden="true"></i> </button>
+                            </form> 
+
+                          </td>
                         <tr>
                         @endforeach
 

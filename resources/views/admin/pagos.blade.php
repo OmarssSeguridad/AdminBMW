@@ -18,7 +18,7 @@
                           <th scope="col">Producto</th>
                           <th scope="col">Cantidad</th>
                           <th scope="col">Precio</th>
-                          <th scope="col">Accion</th>
+                          <th scope="col" colspan="2">Accion</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -31,6 +31,22 @@
                           <td>{{$pago->producto}}</td>
                           <td>{{$pago->cantidad}}</td>
                           <td>{{$pago->precio}}</td>
+                          <td>
+                             <form action="" method="PUT">
+                                {{ csrf_field() }}
+                                {{ method_field('PUT') }}
+                                <button type="submit"class="btn btn-info btn-fill pull-right"><i class="fa fa-edit"></i></button>
+                            </form>
+                            </td>
+                            <td>
+                            <form action="{{'/admin/bajaPago/'.$pago->id.'/'.$pago->pago }}" method="post"> 
+                                {{ csrf_field() }}
+                                {{ method_field('DELETE') }}
+
+                                <button type="submit" class="btn btn-danger btn-fill pull-right"><i class="fa fa-trash-o" aria-hidden="true"></i> </button>
+                            </form> 
+                          </td>
+
                         <tr>
                         @endforeach
 

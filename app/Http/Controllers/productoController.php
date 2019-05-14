@@ -32,7 +32,9 @@ class productoController extends Controller
      */
     public function create()
     {
-        return view("admin.AltaProducto");
+                $categoria = Categorias::All();
+
+        return view("admin.AltaProducto", compact('categoria'));
     }
 
     /**
@@ -43,6 +45,7 @@ class productoController extends Controller
      */
     public function store(Request $request)
     {
+        $categoria = Categorias::All();
         $producto = new Productos;   
         $producto->name = $request->name;
         $producto->precio = $request->precio;

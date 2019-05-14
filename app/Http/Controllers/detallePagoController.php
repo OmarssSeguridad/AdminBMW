@@ -62,6 +62,7 @@ class detallePagoController extends Controller
         $motociclista=Motociclistas::all();
         $producto=Productos::all();
         $modoPago=ModoPago::all();
+        
         return view("admin.AltaPago",compact('motociclista','producto','modoPago'));
 
     }
@@ -105,13 +106,22 @@ class detallePagoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id,$id2)
     {
-        //
+        $detallePago = detallesPago::find($id);
+        $pago = Pagos::find($id2);
+
+        $detallePago->delete();
+        $pago->delete();
+
+         $pagos = DB::select('SELECT d.id_detalle as id, d.id_pago as pago, m.name AS name, m.ap AS ap, m.am AS am, p.fecha as fecha, q.name AS modopago, w.name as producto, d.cantidad as cantidad, d.precio as precio FROM detalles_pagos d JOIN pagos p, motociclistas m, modo_pagos q, productos w WHERE p.id_motociclista = m.id_motociclista AND q.id_modopago = p.id_modopago AND w.id_producto = d.id_producto AND p.id_pago = d.id_pago');
+
+        return view("admin.pagos",compact('pagos'));  
+
     }
     public function mostrarPagos()
     {
-        $pagos = DB::select('SELECT d.id_detalle as id, m.name AS name, m.ap AS ap, m.am AS am, p.fecha as fecha, q.name AS modopago, w.name as producto, d.cantidad as cantidad, d.precio as precio FROM detalles_pagos d JOIN pagos p, motociclistas m, modo_pagos q, productos w WHERE p.id_motociclista = m.id_motociclista AND q.id_modopago = p.id_modopago AND w.id_producto = d.id_producto AND p.id_pago = d.id_pago');
+        $pagos = DB::select('SELECT d.id_detalle as id, d.id_pago as pago, m.name AS name, m.ap AS ap, m.am AS am, p.fecha as fecha, q.name AS modopago, w.name as producto, d.cantidad as cantidad, d.precio as precio FROM detalles_pagos d JOIN pagos p, motociclistas m, modo_pagos q, productos w WHERE p.id_motociclista = m.id_motociclista AND q.id_modopago = p.id_modopago AND w.id_producto = d.id_producto AND p.id_pago = d.id_pago');
 
         
 

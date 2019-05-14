@@ -50,6 +50,9 @@ Route::group([
 
 	//BAJAS
 	Route::delete('/bajaUsuario/{id}', 'AdminController@destroy');
+	Route::delete('/bajaMotociclista/{id}', 'motociclistasController@destroy');
+	Route::delete('/bajaPago/{id}/{id2}', 'detallepagoController@destroy');
+	Route::delete('/bajaRuta/{id}/{id2}/{id3}','detalleRutaController@destroy');
 
 	//MODIFICAIONES
 	Route::get('/editaUsuario/{id}','adminController@edit')->name('editarUsuario');
@@ -66,6 +69,21 @@ Route::group([
 	Route::get('/ModoPago', 'modoPagoController@mostrarModoPago');
 
 
+
+
+
+	//Muchas Rutas xD
+	Route::resource('Categoria', 'CategoriaController')->except([
+	    'create', 'store'
+	]);
+	Route::resource('motociclista', 'motociclistasController')->except([
+	    'create', 'store'
+	]);
+	Route::resource('producto', 'productoController')->except([
+	    'create', 'store'
+	]);
+
+
 /*
 
 
@@ -77,24 +95,7 @@ GET	        /photos/{photo}  	      show	         photos.show
 GET	        /photos/{photo}/edit	  edit	         photos.edit
 PUT/PATCH	/photos/{photo}	          update	     photos.update
 DELETE	    /photos/{photo}	          destroy	     photos.destroy
-
 */
-
-
-
-	//Muchas Rutas xD
-Route::resource('Categoria', 'CategoriaController')->except([
-    'create', 'store'
-]);
-
-Route::resource('motociclista', 'motociclistasController')->except([
-    'create', 'store'
-]);
-
-Route::resource('producto', 'productoController')->except([
-    'create', 'store'
-]);
-
 
 
 });

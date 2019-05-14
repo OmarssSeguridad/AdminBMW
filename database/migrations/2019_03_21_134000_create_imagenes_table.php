@@ -17,7 +17,6 @@ class CreateImagenesTable extends Migration
             $table->bigIncrements('id_imagenes');
             $table->string('name');
             $table->string('ruta');
-            $table->unsignedbigInteger('id_detalleruta')->unsigned();
 
             $table->timestamps();
         });
