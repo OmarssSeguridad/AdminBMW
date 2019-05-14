@@ -45,22 +45,22 @@ class detalleRutaController extends Controller
         $ruta->name= $request->name;
         $ruta->detalle=$request->detalle;
         $ruta->save();
+        
+        $imagenes= new Imagenes();
+        $imagenes->name= $request->evidencia;
+        $imagenes->ruta= $request->name;
+        $imagenes->save();
 
         $detalleRuta = new detallesRuta();
         $detalleRuta->id_motociclista= $request->id_motociclista;
         $detalleRuta->id_Ruta= Rutas::select('id_ruta')->max('id_ruta'); 
+        $detalleRuta->id_imagenes =Imagenes::select('id_imagenes')->max('id_imagenes'); 
         $detalleRuta->status= 1;
         $detalleRuta->save();
-
-        $imagenes= new Imagenes();
-        $imagenes->name= $request->evidencia;
-        $imagenes->ruta= $request->name;
-        $imagenes->id_detalleRuta= detallesRuta::select('id_detalleRuta')->max('id_detalleRuta');
 
         $this->validate($request, [
            
         ]);
-        $imagenes->save();
         return view('admin.AltaRuta',compact('motociclista'));
 }
 
@@ -104,13 +104,24 @@ class detalleRutaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id,$id2,$id3)
     {
-        //
+        $detalleRuta = detallesRuta::find($id);
+        $ruta = Rutas::find($id2);
+        $imagen = Imagenes::find($id3);
+  
+        $detalleRuta->delete();
+        $ruta->delete();
+        $imagen->delete();
+
+        $ruta = DB::select('SELECT detalles_rutas.id_detalleruta as id,detalles_rutas.id_ruta as idruta ,detalles_rutas.id_imagenes as idimagen , rutas.name as ruta, rutas.detalle as detalle, motociclistas.name as name, motociclistas.ap as ap, motociclistas.am as am, imagenes.name as imagen FROM detalles_rutas JOIN rutas, motociclistas, imagenes WHERE rutas.id_ruta = detalles_rutas.id_ruta AND detalles_rutas.id_motociclista = motociclistas.id_motociclista AND detalles_rutas.id_imagenes = imagenes.id_imagenes');
+
+        return view('admin.rutas', compact('ruta'));
+
     }
     public function mostrarRutas()
     {
-        $ruta = DB::select('SELECT detalles_rutas.id_detalleruta as id, rutas.name as ruta, rutas.detalle as detalle, motociclistas.name as name, motociclistas.ap as ap, motociclistas.am as am, imagenes.name as imagen FROM detalles_rutas JOIN rutas, motociclistas, imagenes WHERE rutas.id_ruta = detalles_rutas.id_ruta AND detalles_rutas.id_motociclista = motociclistas.id_motociclista AND detalles_rutas.id_detalleruta=imagenes.id_detalleruta');
+        $ruta = DB::select('SELECT detalles_rutas.id_detalleruta as id,detalles_rutas.id_ruta as idruta ,detalles_rutas.id_imagenes as idimagen , rutas.name as ruta, rutas.detalle as detalle, motociclistas.name as name, motociclistas.ap as ap, motociclistas.am as am, imagenes.name as imagen FROM detalles_rutas JOIN rutas, motociclistas, imagenes WHERE rutas.id_ruta = detalles_rutas.id_ruta AND detalles_rutas.id_motociclista = motociclistas.id_motociclista AND detalles_rutas.id_imagenes = imagenes.id_imagenes');
 
         return view("admin.Rutas", compact('ruta'));
     }

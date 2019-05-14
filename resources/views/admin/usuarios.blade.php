@@ -15,7 +15,7 @@
                           <th scope="col">Nombre </th>
                           <th scope="col">Correo</th>
                           <th scope="col">Tipo Usuario</th>
-                          <th scope="col">Accion</th>
+                          <th scope="col" colspan="2">Accion</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -31,6 +31,8 @@
                                 {{ method_field('PUT') }}
                                 <button type="submit"class="btn btn-info btn-fill pull-right"><i class="fa fa-edit"></i></button>
                             </form>
+                            </td>
+                            <td>
                             <form action="{{'/admin/bajaUsuario/'.$users->id}}" method="post"> 
                                 {{ csrf_field() }}
                                 {{ method_field('DELETE') }}

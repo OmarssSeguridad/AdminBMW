@@ -16,7 +16,7 @@
                           <th scope="col">Precio</th>
                           <th scope="col">Stock</th>
                           <th scope="col">Categoria</th>
-                          <th scope="col">Acciones</th> 
+                          <th scope="col" colspan="2">Acciones</th> 
 
                         </tr>
                       </thead>
@@ -28,14 +28,23 @@
                           <td>{{$producto->precio}}</td>
                           <td>{{$producto->stock}}</td>
                           <td>{{$producto->categoria}}</td>
-                          <td>
-                            <form action="{{ route('producto.destroy', $producto->id_producto)}}" method="post">
-                              @csrf
-                              @method('PUT')
-                              <a href="{{ route('producto.edit',  $producto->id_producto) }}" class="edit" title="Editar" data-toggle="tooltip"><i class=" material-icons">&#xE254;</i></a>
-                              <button type="submit" class="btn btn-link edit" title="Eliminar" data-toggle="tooltip"> <i class="material-icons">&#xE872;</i></button>
+                         <td>
+                             <form action="{{ route('producto.edit',  $producto->id_producto) }}" method="PUT">
+                                {{ csrf_field() }}
+                                {{ method_field('PUT') }}
+                                <button type="submit"class="btn btn-info btn-fill pull-right"><i class="fa fa-edit"></i></button>
                             </form>
+                            </td>
+                            <td>
+                            <form  method="DELETE"> 
+                                {{ csrf_field() }}
+                                {{ method_field('DELETE') }}
+
+                                <button type="submit" class="btn btn-danger btn-fill pull-right"><i class="fa fa-trash-o" aria-hidden="true"></i> </button>
+                            </form> 
+
                           </td>
+
                         </tr>
                         @endforeach
 

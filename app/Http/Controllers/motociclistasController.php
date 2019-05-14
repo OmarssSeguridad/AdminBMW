@@ -125,6 +125,13 @@ class motociclistasController extends Controller
      */
     public function destroy($id)
     {
-        //
+         $motociclista= Motociclistas::find($id);
+        if($motociclista==null)
+        {
+            return view('errors.404');
+        }
+        $motociclista->delete();
+        $motociclistas = Motociclistas::all();
+        return view("admin.Motociclistas",compact('motociclistas'));    
     }
 }

@@ -24,6 +24,11 @@ class modoPagoController extends Controller
         $modoPago->save(); 
         return view("admin.altaModoPago");
     }
+    public function mostrarModoPago()
+    {
+      $modoPagos = modoPago::all();
+      return view('admin.modoPago', compact('modoPagos'));
+    }
 
 
 }
