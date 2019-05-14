@@ -32,11 +32,10 @@
                           <td>{{$pago->cantidad}}</td>
                           <td>{{$pago->precio}}</td>
                           <td>
-                             <form action="" method="PUT">
-                                {{ csrf_field() }}
-                                {{ method_field('PUT') }}
-                                <button type="submit"class="btn btn-info btn-fill pull-right"><i class="fa fa-edit"></i></button>
-                            </form>
+                             
+                                
+                                <a href="{{ route('pago.edit',  $pago->id) }}"  class="btn btn-info btn-fill pull-right"><i class="fa fa-edit"></i></a>
+                           
                             </td>
                             <td>
                             <form action="{{'/admin/bajaPago/'.$pago->id.'/'.$pago->pago }}" method="post"> 

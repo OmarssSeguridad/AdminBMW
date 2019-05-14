@@ -62,7 +62,7 @@ Route::group([
 	//CONSULTAS
     Route::get('/Usuarios', 'AdminController@mostrarUsers');
 	Route::get('/Motociclistas', 'motociclistasController@mostrarMotociclistas');
-	Route::get('/Pagos', 'detallePagoController@mostrarPagos');
+	Route::get('/Pagos', 'detallePagoController@mostrarPagos')->name('pagos');
 	Route::get('/Rutas', 'detalleRutaController@mostrarRutas');
 	Route::get('/Productos', 'productoController@mostrarProductos');
 	Route::get('/Categorias', 'categoriaController@mostrarCategorias');
@@ -82,6 +82,10 @@ Route::group([
 	Route::resource('producto', 'productoController')->except([
 	    'create', 'store'
 	]);
+	Route::resource('pago', 'detallePagoController')->except([
+	    'create', 'store','index'
+	]);
+
 
 
 /*
