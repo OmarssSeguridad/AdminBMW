@@ -28,14 +28,15 @@
                           <td>{{$rutas->name}} {{$rutas->ap}} {{$rutas->am}}</td>
                           <td>{{$rutas->imagen}}</td>
                           <td>
-                             <form action="" method="PUT">
+                             <form action="{{'/admin/editaRuta/'.$rutas->id}}" method="PUT">
                                 {{ csrf_field() }}
                                 {{ method_field('PUT') }}
+
                                 <button type="submit"class="btn btn-info btn-fill pull-right"><i class="fa fa-edit"></i></button>
                             </form>
                             </td>
                             <td>
-                           <form action="{{'/admin/bajaRuta/'.$rutas->id.'/'.$rutas->idruta.'/'.$rutas->idimagen}}" method="post"> 
+                           <form action="{{'/admin/bajaRuta/'.$rutas->id.'/'.$rutas->idruta }}" method="post"> 
                                     {{ csrf_field() }}
                                     {{ method_field('DELETE') }}
 

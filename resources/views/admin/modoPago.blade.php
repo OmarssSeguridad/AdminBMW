@@ -21,18 +21,19 @@
                       <tbody>
                         @foreach($modoPagos as $modoPago)
                         <tr>
-                          <th scope="row">{{$modoPago->id_modoPago}}</th>
+                          <th scope="row">{{$modoPago->id_modopago}}</th>
                           <td>{{$modoPago->name}}</td>
                           <td>{{$modoPago->detalle}}</td>
                           <td>
-                             <form method="PUT">
+                             <form method="PUT" action="{{'/admin/editaModoPago/'.$modoPago->id_modopago }}">
                                 {{ csrf_field() }}
                                 {{ method_field('PUT') }}
+
                                 <button type="submit"class="btn btn-info btn-fill pull-right"><i class="fa fa-edit"></i></button>
                             </form>
                             </td>
                             <td>
-                            <form  method="post"> 
+                            <form  method="post" action="{{'bajaModoPago/'.$modoPago->id_modopago}}"> 
                                 {{ csrf_field() }}
                                 {{ method_field('DELETE') }}
 

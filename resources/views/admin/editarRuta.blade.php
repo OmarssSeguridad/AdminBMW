@@ -10,14 +10,16 @@
                     <h4 class="card-title" style="font-family: 'Montserrat';">Registrar Ruta</h4>
                     </div>
                     <div class="card-body">
-                     <form class="form-horizontal" role="form" method="POST" action="{{ route('altaRuta') }}">
+                     <form class="form-horizontal" role="form" method="post" action="{{'/admin/editarRuta/'.$detalleRuta->id_detalleruta}}">
 
                     {{ csrf_field() }}
+                    {{ method_field('PUT') }}
+
                             <div class="row">
                                 <div class="col-md-4 px-1">
                                     <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                                         <label class="label">Nombre de Ruta</label>
-                                        <input type="text" class="form-control" placeholder="Nombre" maxlength="50" name="name" value="{{ old('name') }}" autofocus >
+                                        <input type="text" class="form-control" placeholder="Nombre" maxlength="50" name="name" value="{{ old('name', $ruta->name) }}" autofocus >
                                             @if ($errors->has('name'))
                                                 <span class="alert alert-danger">
                                                     <strong>{{ $errors->first('name') }}</strong>
@@ -28,7 +30,7 @@
                                 <div class="col-md-4 px-1">
                                     <div class="form-group{{ $errors->has('detalle') ? ' has-error' : '' }}">
                                         <label class="label">Detalle de Ruta</label>
-                                        <input type="text" class="form-control" placeholder="Chiltepec-Toluca" maxlength="70" name="detalle" value="{{ old('detalle') }}" autofocus >
+                                        <input type="text" class="form-control" placeholder="Chiltepec-Toluca" maxlength="70" name="detalle" value="{{ old('detalle', $ruta->detalle) }}" autofocus >
                                             @if ($errors->has('detalle'))
                                                 <span class="alert alert-danger">
                                                     <strong>{{ $errors->first('detalle') }}</strong>
@@ -55,7 +57,7 @@
                                 <div class="col-md-4 px-1">
                                     <div class="form-group">
                                         <label class="label">Evidencia</label>
-                                        <input type="file" class="form-control-file" value="{{old('evidencia')}}" name="evidencia" class="form-control" >
+                                        <input type="file" class="form-control-file" value="{{old('evidencia',$ruta->evidencia)}}" name="evidencia" class="form-control" >
                                         </br>
                                     </div>
                                 </div>
@@ -63,7 +65,7 @@
 
                         </div>
 
-                                <button type="submit" class="btn btn-info btn-fill pull-right" >Crear Ruta</button>
+                                <button type="submit" class="btn btn-info btn-fill pull-right" >Editar Ruta</button>
                         </form>
                     </div>
                 </div>

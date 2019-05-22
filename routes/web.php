@@ -53,20 +53,24 @@ Route::group([
 	Route::delete('/bajaMotociclista/{id}', 'motociclistasController@destroy');
 	Route::delete('/bajaPago/{id}/{id2}', 'detallepagoController@destroy');
 	Route::delete('/bajaRuta/{id}/{id2}/{id3}','detalleRutaController@destroy');
+	Route::delete('/bajaModoPago/{id}','modoPagoController@destroy');
 
 	//MODIFICAIONES
 	Route::get('/editaUsuario/{id}','adminController@edit')->name('editarUsuario');
 	Route::put('/editarUsuario/{id}','adminController@update');
-
+	Route::get('/editaRuta/{id} ','detalleRutaController@edit')->name('editarUsuario');
+	Route::put('/editarRuta/{id}','detalleRutaController@update');
+	Route::get('/editaModoPago/{id}','modoPagoController@edit')->name('editarModoPago');
+	Route::put('/editarModoPago/{id}','modoPagoController@update');
 
 	//CONSULTAS
     Route::get('/Usuarios', 'AdminController@mostrarUsers');
 	Route::get('/Motociclistas', 'motociclistasController@mostrarMotociclistas');
 	Route::get('/Pagos', 'detallePagoController@mostrarPagos')->name('pagos');
-	Route::get('/Rutas', 'detalleRutaController@mostrarRutas');
+	Route::get('/Rutas', 'detalleRutaController@mostrarRutas')->name('rutas');
 	Route::get('/Productos', 'productoController@mostrarProductos');
 	Route::get('/Categorias', 'categoriaController@mostrarCategorias');
-	Route::get('/ModoPago', 'modoPagoController@mostrarModoPago');
+	Route::get('/ModoPago', 'modoPagoController@mostrarModoPago')->name('modoPagos');
 
 
 
