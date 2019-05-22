@@ -46,20 +46,7 @@
       </div>
     </li>
 
-        <li class="nav-item dropdown">
-      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-        Bajas
-      </a>
-      <div class="dropdown-menu">
-        <a class="dropdown-item" href="#">Bajas Usuarios</a>
-        <a class="dropdown-item" href="#">Bajas Motociclista</a>
-        <a class="dropdown-item" href="#">Bajas Pagos</a>
-        <a class="dropdown-item" href="#">Bajas Rutas</a>
-        <a class="dropdown-item" href="#">Bajas Productos</a>
-        <a class="dropdown-item" href="#">Bajas Categorias</a>
-        <a class="dropdown-item" href="#">Bajas Modo de pago</a>
-      </div>
-    </li>
+
     <li class="nav-item dropdown">
       <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
         Consultas
@@ -74,20 +61,7 @@
         <a class="dropdown-item" href="/admin/ModoPago">Consultar Modo de pago</a>
       </div>
     </li>
-    <li class="nav-item dropdown">
-      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-        Modificaciones
-      </a>
-      <div class="dropdown-menu">
-        <a class="dropdown-item" href="#">Modificar Usuarios</a>
-        <a class="dropdown-item" href="#">Modificar Motociclista</a>
-        <a class="dropdown-item" href="#">Modificar Pagos</a>
-        <a class="dropdown-item" href="#">Modificar Rutas</a>
-        <a class="dropdown-item" href="#">Modificar Productos</a>
-        <a class="dropdown-item" href="#">Modificar Categorias</a>
-        <a class="dropdown-item" href="#">Modificar Modo de pago</a>
-      </div>
-    </li>
+
     <li class="nav-item">
       <a class="nav-link" href="{{ route('logout') }}"
          onclick="event.preventDefault();

@@ -49,6 +49,18 @@ class detalleRutaController extends Controller
         $imagenes= new Imagenes();
         $imagenes->name= $request->evidencia;
         $imagenes->ruta= $request->name;
+        /*
+        if($request->evidencia != null)
+        {
+
+            $file = $request->file('evidencia');
+            //obtenemos el nombre del archivo
+            $nombre = $request->evidencia;
+            $imagenes->ruta = $nombre;
+               //indicamos que queremos guardar un nuevo archivo en el disco local
+            \Storage::disk('local')->put($nombre,  \File::get($file));    
+        }
+        */
         $imagenes->save();
 
         $detalleRuta = new detallesRuta();
@@ -83,8 +95,13 @@ class detalleRutaController extends Controller
      */
     public function edit($id)
     {
-        //
-    }
+        $motociclista = Motociclistas::all();
+        $detalleRuta = detallesRuta::find($id);
+        $ruta = Rutas::find($detalleRuta->id_ruta);
+        
+        //$imagen = Imagenes::find($id2);
+        return view("admin.editarRuta",compact('motociclista','ruta','detalleRuta'));    
+   }
 
     /**
      * Update the specified resource in storage.
@@ -95,7 +112,15 @@ class detalleRutaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $detalleRuta = detallesRuta::find($id);
+        $detalleRuta->id_motociclista= $request->id_motociclista;
+        $detalleRuta->save();
+        $ruta = Rutas::find($detalleRuta->id_ruta);
+        $ruta->name= $request->name;
+        $ruta->detalle=$request->detalle;
+        $ruta->save();    
+        return redirect()->route('rutas');
     }
 
     /**
