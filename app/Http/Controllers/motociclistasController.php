@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Motociclistas;
+use Illuminate\Mail\Message;
+use Mail;
 
 class motociclistasController extends Controller
 {
@@ -57,6 +59,28 @@ class motociclistasController extends Controller
         ]);
 
         $motociclista->save(); 
+        //Envio de email 
+        $name = $request->name;
+        $ap = $request->ap;
+        $am = $request->am;
+        $direccion = $request->direccion;
+        $fecNac = $request->fecNac;
+        $email = $request->email;
+        $telefono = $request->telefono;
+
+        $folio = Motociclistas::select('id_motociclista')->max('id_motociclista'); 
+        Mail::send('emails.altaMotociclista', [
+                'name'=> $name,
+                'ap'=>$ap,
+                'am' =>$am,
+                'direccion' =>$direccion,
+                'fecNac' =>$fecNac,
+                'email' =>$email,
+                'telefono' => $telefono
+            ], function(Message $message)use($request){
+            $message->to($request->email,'Sistemas')->subject('Bienvenido');
+        });
+
         return view("admin.altaMotociclista");
     }
 

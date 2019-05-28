@@ -72,9 +72,8 @@ Route::group([
 	Route::get('/Categorias', 'categoriaController@mostrarCategorias');
 	Route::get('/ModoPago', 'modoPagoController@mostrarModoPago')->name('modoPagos');
 
-
-
-
+	//Consultas PDF
+	Route::get('/Pagos/imp/{id}', 'PdfController@imprimir')->name('pdfpagos');
 
 	//Muchas Rutas xD
 	Route::resource('Categoria', 'CategoriaController')->except([

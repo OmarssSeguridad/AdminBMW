@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-header">Pagos Registrados</div>
 
@@ -18,7 +18,7 @@
                           <th scope="col">Producto</th>
                           <th scope="col">Cantidad</th>
                           <th scope="col">Precio</th>
-                          <th scope="col" colspan="2">Accion</th>
+                          <th scope="col" colspan="3">Accion</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -35,8 +35,9 @@
                              
                                 
                             <a href="{{ route('pago.edit',  $pago->id) }}"  class="btn btn-info btn-fill pull-right"><i class="fa fa-edit"></i></a>
-                            </td>
-                            <td>
+                            
+                          </td>
+                          <td>
                             <form action="{{'/admin/bajaPago/'.$pago->id.'/'.$pago->pago }}" method="post"> 
                                 {{ csrf_field() }}
                                 {{ method_field('DELETE') }}
@@ -44,8 +45,15 @@
                                 <button type="submit" class="btn btn-danger btn-fill pull-right"><i class="fa fa-trash-o" aria-hidden="true"></i> </button>
                             </form> 
                           </td>
+                          <td>
+                            <form action="{{'/admin/Pagos/imp/'.$pago->id }}" method="get"> 
+                                {{ csrf_field() }}
 
-                        <tr>
+                                <button type="submit" class="btn btn-success btn-fill pull-right"><i class="fa fa-download" aria-hidden="true"></i> </button>
+                            </form> 
+
+                          </td>
+                        </tr>
                         @endforeach
 
                       </tbody>

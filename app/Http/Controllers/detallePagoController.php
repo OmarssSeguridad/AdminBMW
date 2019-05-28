@@ -9,6 +9,9 @@ use App\Motociclistas;
 use App\Productos;
 use App\ModoPago;
 use DB;
+use Mail;
+use Illuminate\Mail\Message;
+
 class detallePagoController extends Controller
 {
     /**
@@ -63,6 +66,22 @@ class detallePagoController extends Controller
         $producto=Productos::all();
         $modoPago=ModoPago::all();
         
+        //Envio de email 
+        $motociclistass = motociclistas::select("name", "ap", "am")->find($request->id_motociclista);
+        $productoss = productos::select("name")->find($request->id_producto);
+        $asunto = 'Pago Realizado';
+        $folio = Pagos::select('id_pago')->max('id_pago'); 
+        Mail::send('emails.AltaPago', [
+                'motociclista'=> $motociclistass,
+                'producto'=>$productoss,
+                'asunto' =>$asunto,
+                'folio' =>$folio
+            ], function(Message $message)use($request){
+            $message->to('omar.blanco@8w.com.mx','Sistemas')->subject('Pago Realizado');
+        });
+
+
+
         return view("admin.AltaPago",compact('motociclista','producto','modoPago'));
 
     }
