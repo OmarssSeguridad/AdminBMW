@@ -49,21 +49,25 @@ class detallePagoController extends Controller
         $pago->id_modopago=$request->id_motociclista;
         $pago->save();
 
+        $costo = productos::find();
         $detallePago = new detallesPago();
         $detallePago->id_pago= Pagos::select('id_pago')->max('id_pago'); 
         $detallePago->id_producto= $request->id_producto;
         $detallePago->cantidad= $request->cantidad;
-        $detallePago->precio= $request->precio;
+        $detallePago->precio= ;
         $this->validate($request, [
-           
+            
         ]);
 
         $detallePago->save(); 
+        $consuPago= Pagos::select('id_pago')->max('id_pago'); 
+        $consuDetPag = detallesPago::find($consuPago);
+
         $motociclista=Motociclistas::all();
         $producto=Productos::all();
         $modoPago=ModoPago::all();
         
-        return view("admin.AltaPago",compact('motociclista','producto','modoPago'));
+        return view("admin.AltaPago",compact('motociclista','producto','modoPago','consuDetPag'));
 
     }
     /**

@@ -47,7 +47,7 @@
                                         <label class="label">Productos</label>
                                         <select id="id_producto" name="id_producto" class="form-control" placeholder="Seleciona">
                                             @foreach($producto as $productos)
-                                            <option value="{{$productos->id_producto}}/{{$productos->precio}}">{{$productos->name}}</option>
+                                            <option value="{{$productos->id_producto}}">{{$productos->name}}</option>
                                             @endforeach
                                         </select>
                                             @if ($errors->has('id_producto'))
@@ -66,7 +66,13 @@
                                                     <strong>{{ $errors->first('cantidad') }}</strong>
                                                 </span>
                                             @endif
-                                            <button id="adicionar" class="btn btn-success btn-fill pull-right" type="button"><i class="fa fa-shopping-cart" aria-hidden="true"></i></button>
+                                          
+                                    </div>
+                                </div>
+                                <div class="col-md-1">
+                                    <div class="form-group{{ $errors->has('cantidad') ? ' has-error' : '' }}">
+                                        <label class="label">Agregar</label><br>
+                                            <button id="adicionar" class="btn btn-success btn-fill pull-right" type="button"><i class="fa fa-shopping-cart" aria-hidden="true" type="submit"></i></button>
                                     </div>
                                 </div>
                                 </div>
@@ -84,7 +90,7 @@
                                     </table>
                                     <p>Elementos en la Tabla:<div id="adicionados"></div></p>
                                 </div>
-                                <button type="submit" class="btn btn-info btn-fill pull-right">Crear Pago</button>
+                                <button id="adicionar" type="submit" class="btn btn-info btn-fill pull-right">Crear Pago</button>
                         </form>
                     </div>
                 </div>
