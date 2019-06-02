@@ -44,6 +44,11 @@ class detalleRutaController extends Controller
         $ruta= new Rutas();
         $ruta->name= $request->name;
         $ruta->detalle=$request->detalle;
+        $this->validate($request, [
+            'name'=>'required|max:30',
+            'detalle'=>'required',
+        ]);
+
         $ruta->save();
         
         $imagenes= new Imagenes();
@@ -119,6 +124,11 @@ class detalleRutaController extends Controller
         $ruta = Rutas::find($detalleRuta->id_ruta);
         $ruta->name= $request->name;
         $ruta->detalle=$request->detalle;
+        $this->validate($request, [
+            'name'=>'required|max:30',
+            'detalle'=>'required',
+        ]);
+
         $ruta->save();    
         return redirect()->route('rutas');
     }

@@ -50,6 +50,10 @@ class detallePagoController extends Controller
         $pago->id_motociclista= $request->id_motociclista;
         $pago->fecha=$request->fecha;
         $pago->id_modopago=$request->id_motociclista;
+        $this->validate($request, [
+            'fecha'=>'required',
+        ]);
+
         $pago->save();
 
         $detallePago = new detallesPago();
@@ -58,7 +62,8 @@ class detallePagoController extends Controller
         $detallePago->cantidad= $request->cantidad;
         $detallePago->precio= $request->precio;
         $this->validate($request, [
-           
+            'cantidad'=>'required',
+            'precio'=>'required',
         ]);
 
         $detallePago->save(); 
@@ -137,6 +142,11 @@ class detallePagoController extends Controller
         $detallePago->id_producto= $request->get('id_producto');
         $detallePago->cantidad= $request->get('cantidad');
         $detallePago->precio= $request->get('precio');
+        $this->validate($request, [
+            'cantidad'=>'required|max:30',
+            'precio'=>'required',
+        ]);
+
         
         $detallePago->save(); 
 
