@@ -72,6 +72,11 @@ Route::group([
 	Route::get('/Categorias', 'categoriaController@mostrarCategorias');
 	Route::get('/ModoPago', 'modoPagoController@mostrarModoPago')->name('modoPagos');
 
+	Route::get('graficas','GraficasController@graficas');
+	Route::get('grafica_areas', 'GraficasController@grafica_areas');
+	Route::get('grafica_barras', 'GraficasController@grafica_barras');
+	Route::get('grafica_pie', 'GraficasController@grafica_pie');
+	Route::get('grafica_3d', 'GraficasController@grafica_3d');
 
 
 
