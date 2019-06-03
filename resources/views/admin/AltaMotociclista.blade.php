@@ -92,7 +92,7 @@
                                     </div>
                                 </div>
                             </div>
-                                <button type="submit" class="btn btn-info btn-fill pull-right" >Crear Usuario</button>
+                                <button type="submit" class="btn btn-info btn-fill pull-right" >Crear Motociclista</button>
                         </form>
                     </div>
                 </div>
