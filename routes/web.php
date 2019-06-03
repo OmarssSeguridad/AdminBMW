@@ -35,6 +35,9 @@ Route::group([
 
 	Route::get('/AltaPago', 'detallepagoController@create')->name('altaPago');
 	Route::post('/AltaPago','detallepagoController@store');
+	
+	Route::post('/carrito','detallepagoController@carrito')->name('carrito');
+
 		
 	Route::get('/AltaRuta', 'detalleRutaController@create')->name('altaRuta');
 	Route::post('/AltaRuta', 'detalleRutaController@store');
@@ -89,10 +92,43 @@ Route::group([
 	    'create', 'store','index'
 	]);
 
+//carrito
+Route::bind('producto', function($id_producto){
+	return App\Productos::where('id_producto', $id_producto)->first();
+});
 
+Route::get('cart/show', [
+	'as' => 'cart-show',
+	'uses' => 'CartController@show'
+]);
+
+Route::get('cart/add/{producto}', [
+	'as' => 'cart-add',
+	'uses' => 'CartController@add'
+]);
+
+Route::get('cart/delete/{producto}',[
+	'as' => 'cart-delete',
+	'uses' => 'CartController@delete'
+]);
+
+Route::get('cart/trash', [
+	'as' => 'cart-trash',
+	'uses' => 'CartController@trash'
+]);
+
+Route::get('cart/update/{producto}/{cantidad?}', [
+	'as' => 'cart-update',
+	'uses' => 'CartController@update'
+]);
+
+Route::get('order-detail', [
+	'as' => 'order-detail',
+	'uses' => 'CartController@orderDetail'
+]);
+Route::get('combo_moto_email/{id_motociclista}', 'AjaxController@combo');
 
 /*
-
 
 Verb	     URI	                  Action	     Route Name
 GET	        /photos	                  index	         photos.index
@@ -113,3 +149,4 @@ Route::group([
 ], function () {
     Route::get('/dashboard', 'userController@user')->name('user');
 });
+

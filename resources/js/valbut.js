@@ -25,6 +25,18 @@ $(document).ready(function() {
       return '<span id="fancybox-title-over">Foto ' + (currentIndex + 1) + ' / ' + currentArray.length + (title.length ? ' &nbsp; ' + title : '') + '</span>';
     }
   });
+
+    // Update item cart
+  $(".btn-update-item").on('click', function(e){
+    e.preventDefault();
+    
+    var id = $(this).data('id');
+    var href = $(this).data('href');
+    var quantity = $("#product_" + id).val();
+
+    window.location.href = href + "/" + quantity;
+  });
+
 });
 
 /*PRACTICA EXAMEN*/
@@ -38,3 +50,5 @@ function divLogin(){
     clic = 1;
    }   
 }
+//Cantidad
+
