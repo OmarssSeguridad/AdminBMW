@@ -6,6 +6,8 @@
 		<div class="page-header">
 			<h1><i class="fa fa-shopping-cart"></i> Detalle del pedido</h1>
 		</div>
+		<a href="" class="btn btn-primary">
+		<i class="fa fa-chevron-circle-left"></i> Regresar </a>
 		<form class="form-horizontal" role="form" method="POST" action="{{ route('altaPago') }}">
 		{{ csrf_field() }}
 		<div class="page">
@@ -32,9 +34,9 @@
 					</tr>
 					<tr>
 						<td>Modo de Pago:</td>
-						<td><select name="modoPagos" class="form-control" placeholder="Seleciona" >
+						<td><select id="modoPagos" name="modoPagos" class="form-control" placeholder="Seleciona" >
                             @foreach($modoPago as $modoPagos)
-                            <option value="{{$modoPagos->id}}">{{$modoPagos->name}}</option>
+                            <option value="{{$modoPagos->id_modopago}}">{{$modoPagos->id_modopago}} {{$modoPagos->name}}</option>
                             @endforeach
                         </select>
                         </td>
@@ -65,13 +67,10 @@
 					</span>
 				</h3><hr>
 				<p>
-					<a href="{{ route('cart-show') }}" class="btn btn-primary">
+					<button type="submit" class="btn btn-warning btn-fill pull-right" >Crear Pago <i class="fa fa-cc-paypal fa-2x"></i></button>
 
-						<i class="fa fa-chevron-circle-left"></i> Regresar
-					</a>
-					<a href="" class="btn btn-warning">
-						Proceder <i class="fa fa-cc-paypal fa-2x"></i>
-					</a>
+
+					</form>
 				</p>
 			</div>
 		</div>
