@@ -16,32 +16,13 @@
 	    <h5 class="h5" style="color: white;">BMW Club Motorrad Metepec</h5>
 	</div>
 	</nav>
-	<h4> Estimado Usuario:</h4>
+	<h4> Estimado {{ $name }}:</h4>
+	<p>Nos complace darte la bienvenida a BMW Motorrad Club Metepec <font style="color:blue";></font>, Se registro con los siguientes datos,:</p>
+	<p><b>Nombre del Usuario:</b>&nbsp; {{ $name }}</p>
+	<p><b>Correo electronico:</b>&nbsp;{{ $email }}</p>
+	<p><b>Tipo de Usuario:</b>&nbsp;{{ $tipoUser }}</p>
 
-	<p><b>Nombre del Motociclista:</b>&nbsp;{{ $motociclista->name }} {{ $motociclista->ap }} {{ $motociclista->am }}</p>
-		<p><b>Producto Adquirido:</b>&nbsp;
-
-				<table class="table table-striped table-hover table-bordered">
-					<tr>
-						<th>Producto</th>
-						<th>Precio</th>
-						<th>Cantidad</th>
-						<th>Subtotal</th>
-					</tr>
-					@foreach($producto as $items)
-						<tr>
-							<td>{{ $items->name }}</td>
-							<td>${{ number_format($items->precio,2) }}</td>
-							<td>{{ $items->cantidad }}</td>
-							<td>${{ number_format($items->precio * $items->cantidad,2) }}</td>
-						</tr>
-					@endforeach
-				</table><hr>
-
-				<p>		
-	<p><b>Asunto:</b>&nbsp;{{ $asunto }}</p>
-
-	<p>Gracias por su compra, Saludos!.</p>
+	<p>Si algún dato esta mal por favor acercarce al sistemas, Saludos.</p>
 	<p align="center">BMW MOTORRAD CLUB METEPEC A.C.</p>
 	</div>
 	<p>Respuesta generada automaticamente, por favor no responder ni enviar correos a esta cuenta de correo.</p>

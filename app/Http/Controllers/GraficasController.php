@@ -33,21 +33,25 @@ class GraficasController extends Controller
 
     public function grafica_3d()
     {
-        /*SELECT count(d.cantidad), p.name
-FROM detalles_pagos d
-join productos p
-on d.id_producto=p.id_producto
-GROUP BY p.name;*/
-/*
-        $carreras = Carreras::orderBy('nombre')->get();
-        return view("graficas.grafica_3d")
-        ->with('carreras',$carreras);*/
-$ventas= DB::table('detalles_pagos')
+        $ventas= DB::table('detalles_pagos')
         ->join('productos', 'detalles_pagos.id_producto', '=', 'productos.id_producto')
         ->select(DB::raw('COUNT(detalles_pagos.cantidad) as total'), 'productos.name')
         ->groupBy('productos.name')
         ->get();
+
+
         //dd($ventas);
         return view("graficas.grafica_3d", compact('ventas'));
     }
+
+        public function grafica_3ddin()
+    {
+        $dinero= DB::table('detalles_pagos')
+        ->join('productos', 'detalles_pagos.id_producto', '=', 'productos.id_producto')
+        ->select(DB::raw('SUM(detalles_pagos.precio) as total'), 'productos.name')
+        ->groupBy('productos.name')
+        ->get();        //dd($ventas);
+        return view("graficas.grafica_3ddin", compact('dinero'));
+    }
+
 }

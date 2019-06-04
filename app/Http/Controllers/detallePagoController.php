@@ -83,29 +83,29 @@ class detallePagoController extends Controller
             $detallePago->cantidad= $producto->cantidad;
             $detallePago->precio += $producto->cantidad * $producto->precio;
             $detallePago->save();
+            $detallePago->name = Productos::SELECT('name')->find( $producto->id_producto);
             $items[] = $detallePago;
            
         }
 
 
 
-
         $productos=Productos::all();
-        /*
-        //Envio de email 
+        //Envio e email 
         $motociclistass = motociclistas::select("name", "ap", "am")->find($request->id_motociclista);
-        $productoss = productos::select("name")->find($request->id_producto);
+        $productoss = $items;
         $asunto = 'Pago Realizado';
         $folio = Pagos::select('id_pago')->max('id_pago'); 
+        //dd($items);
         Mail::send('emails.AltaPago', [
                 'motociclista'=> $motociclistass,
                 'producto'=>$productoss,
                 'asunto' =>$asunto,
                 'folio' =>$folio
             ], function(Message $message)use($request){
-            $message->to('omar.blanco@8w.com.mx','Sistemas')->subject('Pago Realizado');
+            $message->to($request->correo, 'BMW Motorrad Metepec')->subject('Pago Realizado');
         });
-*/
+
         return view("admin.AltaPago",compact('productos'));
 
     }
@@ -207,6 +207,14 @@ class detallePagoController extends Controller
                 
                 ->ORDERby('detalles_pagos.id_pago')
                 ->get();
+
+        $pagos = DB::table('pagos')
+            ->join('detalles_pagos', 'detalles_pagos.id_pago', '=', 'pagos.id_pago')
+            ->join('motociclistas', 'pagos.id_motociclista', '=', 'motociclistas.id_motociclista')
+            ->join('modo_pagos', 'pagos.id_modopago','=','modo_pagos.id_modopago')
+            ->select('detalles_pagos.id_detalle', 'detalles_pagos.id_pago','pagos.fecha', 'modo_pagos.name as modopago', 'motociclistas.name', 'motociclistas.ap', 'motociclistas.am') 
+            ->ORDERby('detalles_pagos.id_pago')
+            ->get();
         //dd($pagos);
 
         //

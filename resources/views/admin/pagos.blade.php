@@ -40,7 +40,7 @@
                             </form> 
                           </td>
                           <td>
-                            <form action="{{'/admin/Pagos/imp/'.$pago->id }}" method="get"> 
+                            <form action="{{'/admin/Pagos/imp/'.$pago->id_detalle }}" method="get"> 
                                 {{ csrf_field() }}
 
                                 <button type="submit" class="btn btn-success btn-fill pull-right"><i class="fa fa-download" aria-hidden="true"></i> </button>

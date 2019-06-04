@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use PDF;
 use DB;
+use App\Motociclistas;
+use App\Productos;
 
 class PdfController extends Controller
 {
@@ -16,5 +18,30 @@ class PdfController extends Controller
 		$pdf = \PDF::loadView('pdfs.pdfPago', compact('pagos'));
 
   		return $pdf->download('pagos.pdf');
+	}
+
+	public function imprimirMotociclistas()
+	{
+		$motociclistas = Motociclistas::all();
+		//dd($motociclistas);
+		$pdf = \PDF::loadView('pdfs.pdfMotociclistas', compact('motociclistas'));
+
+  		return $pdf->download('Motociclistas.pdf');
+	}
+	public function imprimirProductos()
+	{
+        $productos = DB::table('productos')
+            ->join('categorias', 'productos.id_categoria', '=', 'categorias.id_categoria')
+            ->select('productos.*','categorias.detalle as detalle', 'categorias.name as categoria')
+            ->get();
+
+  		$pdf = \PDF::loadView('pdfs.pdfProductos', compact('productos'));
+		return $pdf->download('productos.pdf');
+
+	}
+	public function imprimirPagos()
+	{
+		
+	
 	}
 }

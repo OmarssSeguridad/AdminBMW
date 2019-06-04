@@ -78,13 +78,16 @@ Route::group([
 
 	//Consultas PDF
 	Route::get('/Pagos/imp/{id}', 'PdfController@imprimir')->name('pdfpagos');
+	Route::get('/Motociclistas/imp', 'PdfController@imprimirmotociclistas')->name('pdfmotociclista');
+	Route::get('/Productos/imp', 'PdfController@imprimirproductos')->name('pdfproducto');
+
  //graficas
 	Route::get('graficas','GraficasController@graficas');
 	Route::get('grafica_areas', 'GraficasController@grafica_areas');
 	Route::get('grafica_barras', 'GraficasController@grafica_barras');
 	Route::get('grafica_pie', 'GraficasController@grafica_pie');
 	Route::get('grafica_3d', 'GraficasController@grafica_3d');
-
+	Route::get('grafica_3ddin', 'GraficasController@grafica_3ddin');
 
 	//Muchas Rutas xD
 	Route::resource('Categoria', 'CategoriaController')->except([
