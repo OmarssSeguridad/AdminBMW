@@ -225,6 +225,10 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+/*<<<<<<< HEAD
+=======
+        'PDF' => 'Barryvdh\DomPDF\Facade',
+>>>>>>> parent of c1e4ef0... njk*/
 
     ],
 
