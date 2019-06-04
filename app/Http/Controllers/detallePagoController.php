@@ -200,14 +200,16 @@ class detallePagoController extends Controller
             //GROUP by detalles_pagos.id_pago
             //ORDER by detalles_pagos.id_pago');
 
-        $pagos = pagos::join('detalles_pagos', 'detalles_pagos.id_pago', '=', 'pagos.id_pago')
+        $pagos = DB::table('pagos')
+        ->join('detalles_pagos', 'detalles_pagos.id_pago', '=', 'pagos.id_pago')
                 ->join('motociclistas', 'pagos.id_motociclista', '=', 'motociclistas.id_motociclista')
                 ->join('modo_pagos', 'pagos.id_modopago','=','modo_pagos.id_modopago')
                 ->select('detalles_pagos.id_detalle', 'detalles_pagos.id_pago','pagos.fecha', 'modo_pagos.name as modopago', 'motociclistas.name', 'motociclistas.ap', 'motociclistas.am')
-                
+                ->GROUPby('detalles_pagos.id_pago')
                 ->ORDERby('detalles_pagos.id_pago')
                 ->get();
-        //dd($pagos);
+
+        dd($pagos);
 
         //
         /*$pagos = detallesPago::join('pagos','pagos.id_pago', '=', 'detalles_pagos.id_pago')
