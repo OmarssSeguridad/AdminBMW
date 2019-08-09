@@ -1,7 +1,12 @@
-@extends('admin.layout.main')
+<!DOCTYPE html>
+<html>
+<head>
 
-@section('content')
-<div class="container">
+</head>
+<body>
+
+
+	<div class="container">
     <div class="row justify-content-center">
         <div class="col-md-10">
             <div class="card">
@@ -17,7 +22,6 @@
                           <th scope="col">Fecha N.</th>
                           <th scope="col">Teléfono</th>
                           <th scope="col">Correo</th>
-                          <th scope="col" colspan="2">Acciones</th> 
 
                         </tr>
                       </thead>
@@ -30,38 +34,21 @@
                           <td>{{$motociclista->fecNac}}</td>
                           <td>{{$motociclista->telefono}}</td>
                           <td>{{$motociclista->email}}</td>
-                          <td>
-                             <form action="{{ route('motociclista.edit',  $motociclista->id_motociclista) }}" method="PUT">
-                                {{ csrf_field() }}
-                                {{ method_field('PUT') }}
-                                <button type="submit"class="btn btn-info btn-fill pull-right"><i class="fa fa-edit"></i></button>
-                            </form>
-                            </td>
-                            <td>
-                           <form action="{{'/admin/bajaMotociclista/'.$motociclista->id_motociclista}}" method="post"> 
-                                    {{ csrf_field() }}
-                                    {{ method_field('DELETE') }}
 
-                                <button type="submit" class="btn btn-danger btn-fill pull-right"><i class="fa fa-trash-o" aria-hidden="true"></i> </button>
-                            </form> 
-
-                          </td>
                         </tr>
                         @endforeach
-
-                        
-
                       </tbody>
                     </table>
-                      <form action="{{ route('pdfmotociclista')}}" method="get"> 
-                          {{ csrf_field() }}
-
-                          <button type="submit" class="btn btn-success btn-fill pull-right">Imprimir Reporte <i class="fa fa-download" aria-hidden="true"></i> </button>
-                      </form> 
-
+            
                 </div>
             </div>
         </div>
     </div>
 </div>
-@endsection
+<p align="center">BMW MOTORRAD CLUB METEPEC A.C.</p>
+  </div>
+
+
+
+</body>
+</html>

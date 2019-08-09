@@ -15,30 +15,24 @@
                           <th scope="col">Motociclista </th>
                           <th scope="col">Fecha</th>
                           <th scope="col">Modo de Pago</th>
-                          <th scope="col">Producto</th>
-                          <th scope="col">Cantidad</th>
-                          <th scope="col">Precio</th>
                           <th scope="col" colspan="3">Accion</th>
                         </tr>
                       </thead>
                       <tbody>
                         @foreach($pagos as $pago)
                         <tr>
-                          <th scope="row">{{$pago->id}}</th>
+                          <th scope="row">{{$pago->id_pago}}</th>
                           <td>{{$pago->name}} {{$pago->ap}} {{$pago->am}}</td>
                           <td>{{$pago->fecha}}</td>
                           <td>{{$pago->modopago}}</td>
-                          <td>{{$pago->producto}}</td>
-                          <td>{{$pago->cantidad}}</td>
-                          <td>{{$pago->precio}}</td>
                           <td>
                              
                                 
-                            <a href="{{ route('pago.edit',  $pago->id) }}"  class="btn btn-info btn-fill pull-right"><i class="fa fa-edit"></i></a>
+                            <a href="{{ route('pago.edit',  $pago->id_detalle) }}"  class="btn btn-info btn-fill pull-right"><i class="fa fa-edit"></i></a>
                             
                           </td>
                           <td>
-                            <form action="{{'/admin/bajaPago/'.$pago->id.'/'.$pago->pago }}" method="post"> 
+                            <form action="{{'/admin/bajaPago/'.$pago->id_detalle.'/'.$pago->id_pago }}" method="post"> 
                                 {{ csrf_field() }}
                                 {{ method_field('DELETE') }}
 
@@ -46,7 +40,7 @@
                             </form> 
                           </td>
                           <td>
-                            <form action="{{'/admin/Pagos/imp/'.$pago->id }}" method="get"> 
+                            <form action="{{'/admin/Pagos/imp/'.$pago->id_detalle }}" method="get"> 
                                 {{ csrf_field() }}
 
                                 <button type="submit" class="btn btn-success btn-fill pull-right"><i class="fa fa-download" aria-hidden="true"></i> </button>

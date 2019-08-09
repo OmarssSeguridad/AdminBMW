@@ -59,6 +59,8 @@
         <a class="dropdown-item" href="/admin/producto">Consultar Productos</a>
         <a class="dropdown-item" href="/admin/Categoria">Consultar Categorias</a>
         <a class="dropdown-item" href="/admin/ModoPago">Consultar Modo de pago</a>
+        <a class="dropdown-item" href="/admin/grafica_3d">Consultar ventas</a>
+        
       </div>
     </li>
 

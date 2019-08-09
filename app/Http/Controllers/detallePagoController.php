@@ -48,16 +48,8 @@ class detallePagoController extends Controller
      */
     public function store(Request $request)
     {
-/*
-        $pago= new Pagos();
-        $pago->id_motociclista= $request->id_motociclista;
-        $pago->fecha=$request->fecha;
-        $pago->id_modopago=$request->modoPagos;
-        $this->validate($request, [
-            'fecha'=>'required',
-        ]);
 
-        $pago->save();
+/*
 
         $detallePago = new detallesPago();
         $detallePago->id_pago= Pagos::select('id_pago')->max('id_pago'); 
@@ -70,48 +62,51 @@ class detallePagoController extends Controller
             'precio'=>'required',
         ]);
 */
+        $pago= new Pagos();
+        $pago->id_motociclista= $request->id_motociclista;
+        $pago->fecha=$request->fecha;
+        $pago->id_modopago=$request->modoPagos;
+        $this->validate($request, [
+            'fecha'=>'required',
+        ]);
+
+        $pago->save();
         $items = array();
         $subtotal = 0;
         $cart = \Session::get('cart');
         $currency = 'MXN';
 
         foreach($cart as $producto){
-            $item = new Item();
-            $item->setName($producto->name)
-            ->setId($producto->id_producto)
-            ->setQuantity($producto->cantidad)
-            ->setPrice($producto->precio);
-
-            $items[] = $item;
-            $subtotal += $producto->cantidad * $producto->precio;
+            $detallePago = new detallesPago();
+            $detallePago->id_pago= Pagos::select('id_pago')->max('id_pago'); 
+            $detallePago->id_producto= $producto->id_producto;
+            $detallePago->cantidad= $producto->cantidad;
+            $detallePago->precio += $producto->cantidad * $producto->precio;
+            $detallePago->save();
+            $detallePago->name = Productos::SELECT('name')->find( $producto->id_producto);
+            $items[] = $detallePago;
+           
         }
-        dd($items);
-        $item_list = new ItemList();
-        $item_list->setItems($items);
 
 
-/*
 
-        $detallePago->save(); 
-        $motociclista=Motociclistas::all();
-        $producto=Productos::all();
-        $modoPago=ModoPago::all();
-        
-        //Envio de email 
+        $productos=Productos::all();
+        //Envio e email 
         $motociclistass = motociclistas::select("name", "ap", "am")->find($request->id_motociclista);
-        $productoss = productos::select("name")->find($request->id_producto);
+        $productoss = $items;
         $asunto = 'Pago Realizado';
         $folio = Pagos::select('id_pago')->max('id_pago'); 
+        //dd($items);
         Mail::send('emails.AltaPago', [
                 'motociclista'=> $motociclistass,
                 'producto'=>$productoss,
                 'asunto' =>$asunto,
                 'folio' =>$folio
             ], function(Message $message)use($request){
-            $message->to('omar.blanco@8w.com.mx','Sistemas')->subject('Pago Realizado');
+            $message->to($request->correo, 'BMW Motorrad Metepec')->subject('Pago Realizado');
         });
-*/
-        return view("admin.AltaPago",compact('motociclista','producto','modoPago'));
+
+        return view("admin.AltaPago",compact('productos'));
 
     }
     /**
@@ -120,10 +115,7 @@ class detallePagoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function carrito()
-    {
-        //
-    }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -199,18 +191,28 @@ class detallePagoController extends Controller
     }
     public function mostrarPagos()
     {
-        $pagos = DB::select('SELECT d.id_detalle as id, d.id_pago as pago, m.name AS name, m.ap AS ap, m.am AS am, p.fecha as fecha, q.name AS modopago, w.name as producto, d.cantidad as cantidad, d.precio as precio FROM detalles_pagos d JOIN pagos p, motociclistas m, modo_pagos q, productos w WHERE p.id_motociclista = m.id_motociclista AND q.id_modopago = p.id_modopago AND w.id_producto = d.id_producto AND p.id_pago = d.id_pago');
+        //$pagos = DB::select('SELECT detalles_pagos.id_detalle, detalles_pagos.id_pago, motociclistas.name, motociclistas.ap, motociclistas.am, productos.name, detalles_pagos.id_producto
+            //FROM detalles_pagos 
+            //JOIN pagos, motociclistas, productos
+            //WHERE detalles_pagos.id_pago = pagos.id_pago
+            //AND pagos.id_motociclista = motociclistas.id_motociclista
+            //AND detalles_pagos.id_producto = productos.id_producto
+            //GROUP by detalles_pagos.id_pago
+            //ORDER by detalles_pagos.id_pago');
 
-        
-
-        //
-        /*$pagos = detallesPago::join('pagos','pagos.id_pago', '=', 'detalles_pagos.id_pago')
-        ->join('motociclistas', 'pagos.id_motociclista', '=', 'motociclistas.id_motociclista')
-        ->join('modo_pagos', 'modo_pagos.id_modopago', '=', 'pagos.id_modopago')
-        ->join('productos', 'productos.id_producto', '=', 'detalles_pagos.id_producto')
-        ->select('detalles_pagos.id_detalle, motociclistas.name, motociclistas.ap, motociclistas.am, pagos.fecha, modo_pagos.name, productos.name, detalles_pagos.cantidad, detalles_pagos.precio')
-        ->get();*/
+        $pagos = DB::table('pagos')
+        ->join('detalles_pagos', 'detalles_pagos.id_pago', '=', 'pagos.id_pago')
+                ->join('motociclistas', 'pagos.id_motociclista', '=', 'motociclistas.id_motociclista')
+                ->join('modo_pagos', 'pagos.id_modopago','=','modo_pagos.id_modopago')
+                ->select('detalles_pagos.id_detalle', 'detalles_pagos.id_pago','pagos.fecha', 'modo_pagos.name as modopago', 'motociclistas.name', 'motociclistas.ap', 'motociclistas.am')
+                ->GROUPby('detalles_pagos.id_pago')
+                ->ORDERby('detalles_pagos.id_pago')
+                ->get();
 
         return view("admin.Pagos",compact('pagos'));
     }
 }
+
+
+
+

@@ -36,7 +36,7 @@
                             </form>
                             </td>
                             <td>
-                            <form  method="DELETE"> 
+                            <form action= "{{ route('producto.destroy',  $producto->id_producto) }}" method="DELETE"> 
                                 {{ csrf_field() }}
                                 {{ method_field('DELETE') }}
 
@@ -50,7 +50,11 @@
 
                       </tbody>
                     </table>
-            
+                      <form action="{{ route('pdfproducto')}}" method="get"> 
+                          {{ csrf_field() }}
+
+                          <button type="submit" class="btn btn-success btn-fill pull-right">Imprimir Reporte <i class="fa fa-download" aria-hidden="true"></i> </button>
+                      </form> 
                 </div>
             </div>
         </div>

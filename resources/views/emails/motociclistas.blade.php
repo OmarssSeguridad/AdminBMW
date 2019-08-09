@@ -1,7 +1,23 @@
-@extends('admin.layout.main')
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+  <link rel="stylesheet" type="text/css" href="{{ asset('/css/estilosOmi.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('/css/bootstrap.min.css') }}">
+</head>
+<body>
 
-@section('content')
-<div class="container">
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">
+    <img src="{{asset('/img/logos/logoBMWMotorrad.jpg')}}" alt="logo" style="width:100px;"> 
+    </a>  
+	<div class="collapse navbar-collapse" id="navbarNavDropdown">
+	    <h5 class="h5" style="color: white;">BMW Club Motorrad Metepec</h5>
+	</div>
+	</nav>
+
+	<div class="container">
     <div class="row justify-content-center">
         <div class="col-md-10">
             <div class="card">
@@ -53,15 +69,11 @@
 
                       </tbody>
                     </table>
-                      <form action="{{ route('pdfmotociclista')}}" method="get"> 
-                          {{ csrf_field() }}
-
-                          <button type="submit" class="btn btn-success btn-fill pull-right">Imprimir Reporte <i class="fa fa-download" aria-hidden="true"></i> </button>
-                      </form> 
-
+            
                 </div>
             </div>
         </div>
     </div>
 </div>
-@endsection
+</body>
+</html>

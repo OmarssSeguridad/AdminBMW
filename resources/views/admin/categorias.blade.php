@@ -14,7 +14,7 @@
                           <th scope="col">ID</th>
                           <th scope="col">Nombre </th>
                           <th scope="col">Detalle</th>
-                          <th scope="col">Acciones</th>
+                          <th scope="col" colspan="2">Acciones</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -23,14 +23,25 @@
                           <th scope="row">{{$categoria->id_categoria}}</th>
                           <td>{{$categoria->name}}</td>
                           <td>{{$categoria->detalle}}</td>
+
                           <td>
-                            <form action="{{ route('Categoria.destroy', $categoria->id_categoria)}}" method="post">
-                              @csrf
-                              @method('PUT')
-                              <a href="{{ route('Categoria.edit',  $categoria->id_categoria) }}" class="edit" title="Editar" data-toggle="tooltip"><i class=" material-icons">&#xE254;</i></a>
-                              <button type="submit" class="btn btn-link edit" title="Eliminar" data-toggle="tooltip"> <i class="material-icons">&#xE872;</i></button>
+                              <form action="{{ route('Categoria.edit',  $categoria->id_categoria) }}" method="PUT">
+                                {{ csrf_field() }}
+                                {{ method_field('PUT') }}
+                                <button type="submit"class="btn btn-info btn-fill pull-right"><i class="fa fa-edit"></i></button>
                             </form>
+                            </td>
+                            <td>
+                           <form action="{{ route('Categoria.destroy', $categoria->id_categoria)}}" method="post"> 
+                                    {{ csrf_field() }}
+                                    {{ method_field('DELETE') }}
+
+                                <button type="submit" class="btn btn-danger btn-fill pull-right"><i class="fa fa-trash-o" aria-hidden="true"></i> </button>
+                            </form>
+
                           </td>
+
+
                         </tr>
                         @endforeach
 

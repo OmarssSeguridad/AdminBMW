@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use Mail;
+use Illuminate\Mail\Message;
+
 
 class UserController extends Controller
 {
@@ -28,7 +31,23 @@ class UserController extends Controller
         ]);
 
         $user->save(); 
+        $name = $request->name;
+        $email = $request->email;
+        $tipoUser = $request->tipoUser;
+
+        Mail::send('emails.altaUser', [
+                'name'=> $name,
+
+                'email' => $email,
+                'tipoUser' => $tipoUser
+            ], function(Message $message)use($request){
+            $message->to($request->email, $request->name)->subject('Bienvenido');
+        });
+
         return view("admin.altaUsuario");
+    
+
     }
+
     
 }
